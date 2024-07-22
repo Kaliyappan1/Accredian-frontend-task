@@ -7,7 +7,7 @@ const theme = createTheme({
             default: "aliceblue"
           },
         primary: {
-            main: '#e3f2fd'
+            main: '#5e35b1'
         },
         secondary: {
             main: '#1976d2'

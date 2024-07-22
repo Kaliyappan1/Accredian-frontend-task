@@ -1,4 +1,4 @@
-import { Box, Container, ThemeProvider } from '@mui/material'
+import { Container, ThemeProvider } from '@mui/material'
 import './App.css'
 import Header from './Header'
 import theme from './Component/Themes'
@@ -7,12 +7,14 @@ import Footer from './Footer'
 
 function App() {
 
+
   return (
-    <>
+
     <ThemeProvider theme={theme}>
 
       <Header/>
       <Container>
+
 
       <HomePage/>
       </Container>
@@ -20,7 +22,7 @@ function App() {
     </ThemeProvider>
 
 
-    </>
+  
   )
 }
 

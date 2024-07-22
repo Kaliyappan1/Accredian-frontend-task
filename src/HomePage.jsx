@@ -1,9 +1,10 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Icon, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Icon, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import RepeatIcon from "@mui/icons-material/Repeat";
+import PopupForm from "./PopupForm";
 
 function HomePage() {
 
@@ -13,9 +14,6 @@ function HomePage() {
   };
   const handleClose = () => {
     setOpen(false)
-  }
-  const handleSubmit = () => {
-    handleClose();
   }
 
   const FeatureCard = ({ icon, title, description }) => (
@@ -44,6 +42,8 @@ function HomePage() {
       </Paper>
     </Grid>
   );
+
+
   return (
     <div>
       <div className="homepage">
@@ -51,7 +51,7 @@ function HomePage() {
           container
           alignItems="center"
           justifyContent="center"
-          sx={{ height: "23pc" }}
+          sx={{ height: "70vh" }}
         >
           <Box>
             <Typography
@@ -124,65 +124,7 @@ function HomePage() {
           </Grid>
         </Grid>
         
-        <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Refer a Friend
-        <Typography color={"gray"} component="div" variant="caption">Fill out the form below to refer a friend and earn rewards.</Typography>
-        </DialogTitle>
-        <DialogContent color="success">
-          
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Your Name"
-            type="text"
-            fullWidth
-            variant="outlined"
-            color="success"
-          />
-          <TextField
-            margin="dense"
-            label="Your Email"
-            type="email"
-            fullWidth
-            variant="outlined"
-            color="success"
-          />
-          <TextField
-            margin="dense"
-            label="Referral Details"
-            type="text"
-            fullWidth
-            variant="outlined"
-            color="success"
-            multiline
-            rows={4}
-          />
-          <TextField
-            margin="dense"
-            label="Referee Name"
-            type="text"
-            fullWidth
-            variant="outlined"
-            color="success"
-          />
-          <TextField
-            margin="dense"
-            label="Referee Email"
-            type="email"
-            fullWidth
-            variant="outlined"
-            color="success"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="success">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="success">
-            Submit Referral
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <PopupForm open={open} onClose={handleClose} />
        
       </div>
     </div>
