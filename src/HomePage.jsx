@@ -74,7 +74,7 @@ function HomePage() {
             </Typography>
             <Typography align="center">
               <Button
-                sx={{ m: 2, fontSize: 30 }}
+                sx={{ m: 2, fontSize: 25 }}
                 variant="contained"
                 size="large"
                 color="success"

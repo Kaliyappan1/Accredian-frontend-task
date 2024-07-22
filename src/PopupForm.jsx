@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { submitReferral } from './Services/ApiService';
 
 const PopupForm = ({ open, onClose }) => {
   const validationSchema = Yup.object({
@@ -12,11 +13,20 @@ const PopupForm = ({ open, onClose }) => {
     refereeEmail: Yup.string().email('Invalid email address').required('Required'),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     // Handle form submission
-    console.log(values);
-    setSubmitting(false);
-    onClose();
+    try {
+      const response = await submitReferral(values);
+      console.log('Referral submitted:', response);
+      onClose(); // Close the dialog on successful submission
+    } catch (error) {
+      console.error('error submitting referrral :', error);
+      setErrors({ general: 'Failed to submit referral' });
+    } finally {
+      setSubmitting(false);
+      
+    }
+  
   };
 
 
@@ -38,8 +48,13 @@ const PopupForm = ({ open, onClose }) => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, errors }) => (
             <Form>
+              {errors.general && (
+                <Typography variant="body2" color="error">
+                {errors.general}
+              </Typography>
+              )}
               <Field
                 as={TextField}
                 autoFocus
@@ -98,6 +113,7 @@ const PopupForm = ({ open, onClose }) => {
                 helperText={<ErrorMessage name="refereeEmail" />}
                 
               />
+              
               <DialogActions>
                 <Button onClick={onClose} color="success">
                   Cancel
